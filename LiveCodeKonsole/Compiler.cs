@@ -48,7 +48,7 @@ namespace LiveCodeKonsole
             else
             {
                 runner.KeineCompilerfehlerAnzeigen();
-                runner.Ausführen();
+                runner.Ausfuehren();
             }
         }
         
@@ -75,6 +75,6 @@ namespace LiveCodeKonsole
     {
         void FehlerAnzeigen(string sFehler);
         void KeineCompilerfehlerAnzeigen();
-        void Ausführen();
+        void Ausfuehren();
     }
 }

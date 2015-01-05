@@ -45,12 +45,12 @@ namespace LiveCodeKonsole
                     prozessreaktion.ProzessFehlgeschlagen("Endlosschleife");
                 }
 
-                KompilatLöschen();
+                KompilatLoeschen();
                 return sAusgabe;
             }
         }
 
-        void KompilatLöschen()
+        void KompilatLoeschen()
         {
             try
             {

@@ -19,19 +19,19 @@ namespace LiveCodeKonsole
     public partial class HauptfensterProxy : Form, ICompilerCheckedRunner, IProzessreaktion
     {        
         const string dateiNameKlasse = "MeineKlasse.cs";
-        bool bAktualisierungLäuft;
+        bool bAktualisierungLaeuft;
         Compiler compiler;
 
         public HauptfensterProxy()
         {
             InitializeComponent();
 
-            bAktualisierungLäuft = false;
+            bAktualisierungLaeuft = false;
 
             compiler = new Compiler();
 
             QuelltextLaden();
-            QuelltextKompilierenUndAusführen();            
+            QuelltextKompilierenUndAusfuehren();            
         }
 
         private void QuelltextLaden()
@@ -52,7 +52,7 @@ namespace LiveCodeKonsole
 
         private void tbQuelltext_TextChanged(object sender, EventArgs e)
         {
-            QuelltextKompilierenUndAusführen();
+            QuelltextKompilierenUndAusfuehren();
         }
 
         private void QuelltextSichern()
@@ -62,19 +62,19 @@ namespace LiveCodeKonsole
             writer.Close();
         }
 
-        private void QuelltextKompilierenUndAusführen()
+        private void QuelltextKompilierenUndAusfuehren()
         {
-            if (bAktualisierungLäuft)
+            if (bAktualisierungLaeuft)
                 return;
-            bAktualisierungLäuft = true;
+            bAktualisierungLaeuft = true;
 
             compiler.CompileSource(tbQuelltext.Text, DateTime.Now.Ticks + "-MeineKlasse.exe");
             compiler.CheckCompilerResultsAndRun(this);
 
-            bAktualisierungLäuft = false;
+            bAktualisierungLaeuft = false;
         }
 
-        public void Ausführen()
+        public void Ausfuehren()
         {
             BewachterProzess prozess = new BewachterProzess(compiler.GetPathToAssembly());
             tbAusgabe.Text = prozess.Start(this);
