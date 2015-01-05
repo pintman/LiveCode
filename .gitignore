@@ -1,2 +1,8 @@
+
+# binary files 
 LiveCodeKonsole/bin/
-LiveCodeKonsole/obj/x86/Debug/
+LiveCodeKonsole/obj/
+
+# Temporary files
+*~
+
