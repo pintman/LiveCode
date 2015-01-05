@@ -1,4 +1,4 @@
 LiveCode
 ========
 
-Live Code on the Console
+Live Code on the Console.
