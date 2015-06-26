@@ -2,6 +2,7 @@
 # binary files 
 LiveCodeKonsole/bin/
 LiveCodeKonsole/obj/
+*.exe
 
 # Temporary files
 *~
