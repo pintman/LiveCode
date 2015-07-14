@@ -18,14 +18,14 @@ namespace LiveCodeKonsole
 {
     public partial class HauptfensterProxy : Form, ICompilerCheckedRunner, IProzessreaktion
     {        
-        const string dateiNameKlasse = "MeineKlasse.cs";
+        string dateiNameKlasse = Path.GetTempPath() + "MeineKlasse.cs";
         bool bAktualisierungLaeuft;
         Compiler compiler;
 
         public HauptfensterProxy()
         {
             InitializeComponent();
-
+            
             bAktualisierungLaeuft = false;
 
             compiler = new Compiler();
@@ -68,7 +68,7 @@ namespace LiveCodeKonsole
                 return;
             bAktualisierungLaeuft = true;
 
-            compiler.CompileSource(tbQuelltext.Text, DateTime.Now.Ticks + "-MeineKlasse.exe");
+            compiler.CompileSource(tbQuelltext.Text, Path.GetTempPath() + DateTime.Now.Ticks + "-MeineKlasse.exe");
             compiler.CheckCompilerResultsAndRun(this);
 
             bAktualisierungLaeuft = false;
