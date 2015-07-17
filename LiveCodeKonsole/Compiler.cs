@@ -43,6 +43,7 @@ namespace LiveCodeKonsole
         {
             if (compilerResults.Errors.HasErrors)
             {
+                System.Diagnostics.Trace.TraceInformation("Error during compulation: " + CheckCompilerResults());
                 runner.FehlerAnzeigen(CheckCompilerResults());
             }
             else

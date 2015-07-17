@@ -25,6 +25,7 @@ namespace LiveCodeKonsole
         public HauptfensterProxy()
         {
             InitializeComponent();
+            Trace.TraceInformation("Started. Using File " + dateiNameKlasse);
             
             bAktualisierungLaeuft = false;
 
