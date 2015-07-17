@@ -26,7 +26,7 @@ namespace LiveCodeKonsole
         {
             InitializeComponent();
             Trace.TraceInformation("Started. Using File " + dateiNameKlasse);
-            
+
             bAktualisierungLaeuft = false;
 
             compiler = new Compiler();
@@ -65,8 +65,12 @@ namespace LiveCodeKonsole
 
         private void QuelltextKompilierenUndAusfuehren()
         {
-            if (bAktualisierungLaeuft)
+            // TODO: wird noch nicht berücksichtigt: keine Nebenläufigkeit
+            if(bAktualisierungLaeuft)
+            {
                 return;
+            }
+                
             bAktualisierungLaeuft = true;
 
             compiler.CompileSource(tbQuelltext.Text, Path.GetTempPath() + DateTime.Now.Ticks + "-MeineKlasse.exe");
