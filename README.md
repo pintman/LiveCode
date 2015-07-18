@@ -3,7 +3,10 @@ LiveCode
 
 Live Code on the Console. More information can be found at my [german website](https://www.bakera.de/dokuwiki/doku.php/schule/live_coding).
 
-It is written in C# and provides a simple educational IDE for learning the C# programming language. One part of the screen shows the source, while the other shows output of the program. Changes in the sources code become visible in the ouput immediately. 
+It is written in C# and provides a simple educational IDE for learning the C#
+programming language. One part of the screen shows the source, while the other
+shows output of the program. Changes in the sources code become visible in the
+ouput immediately.
 
     +---------------------------------+----------+
     |                                 |          |
@@ -16,4 +19,8 @@ It is written in C# and provides a simple educational IDE for learning the C# pr
 Download
 --------
 
-The current Version can be downloaded [here](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-portable.zip?raw=true). Just extract the ZIP-Archive an run LiveCodeKonsole.exe.
+The current Version can be downloaded either
+[here (portable)](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-portable.zip?raw=true)
+or
+[here (setup)](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-setup.zip?raw=true). For
+the portable version, just extract the ZIP-Archive an run LiveCodeKonsole.exe.
