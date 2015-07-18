@@ -14,6 +14,7 @@ using System.Reflection;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using LiveCodeKonsole.Properties;
 
 namespace LiveCodeKonsole
 {
@@ -21,6 +22,7 @@ namespace LiveCodeKonsole
     {        
         string dateiNameKlasse = Path.GetTempPath() + "MeineKlasse.cs";
         Compiler compiler;
+        Settings settings = Settings.Default;
 
         public HauptfensterProxy()
         {
@@ -45,7 +47,8 @@ namespace LiveCodeKonsole
                 }
                 sQuelltextAlt = sQuelltextNeu;
                 sQuelltextNeu = tbQuelltext.Text;
-                Thread.Sleep(300); // TODO in settings exportieren
+                                
+                Thread.Sleep(settings.compileWaitMs);
             }
 
             Trace.TraceInformation("compilation thread finished.");
@@ -101,13 +104,13 @@ namespace LiveCodeKonsole
         public void FehlerAnzeigen(string sFehler)
         {
             setTextBoxTextThreadSafe(tbFehler, sFehler);
-            setTextBoxBackColorThreadSafe(tbQuelltext, Color.OrangeRed); // TODO Farbe in Config
+            setTextBoxBackColorThreadSafe(tbQuelltext, settings.errorColor);
         }
 
         public void KeineCompilerfehlerAnzeigen()
         {
             setTextBoxTextThreadSafe(tbFehler, "");
-            setTextBoxBackColorThreadSafe(tbQuelltext, Color.White); // TODO Farbe in Config
+            setTextBoxBackColorThreadSafe(tbQuelltext, settings.okColor);
         }
 
         /// <summary>

@@ -22,5 +22,41 @@ namespace LiveCodeKonsole.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int compileWaitMs {
+            get {
+                return ((int)(this["compileWaitMs"]));
+            }
+            set {
+                this["compileWaitMs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color okColor {
+            get {
+                return ((global::System.Drawing.Color)(this["okColor"]));
+            }
+            set {
+                this["okColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("OrangeRed")]
+        public global::System.Drawing.Color errorColor {
+            get {
+                return ((global::System.Drawing.Color)(this["errorColor"]));
+            }
+            set {
+                this["errorColor"] = value;
+            }
+        }
     }
 }
