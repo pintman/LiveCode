@@ -12,3 +12,8 @@ It is written in C# and provides a simple educational IDE for learning the C# pr
     | }                               | Hi 2     |
     |                                 |          |
     +---------------------------------+----------+
+
+Download
+--------
+
+The current Version can be downloaded [here](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-portable.zip?raw=true). Just extract the ZIP-Archive an run LiveCodeKonsole.exe.
