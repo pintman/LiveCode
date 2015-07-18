@@ -39,9 +39,9 @@
             // tbQuelltext
             // 
             this.tbQuelltext.AcceptsTab = true;
-            this.tbQuelltext.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbQuelltext.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbQuelltext.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbQuelltext.Location = new System.Drawing.Point(287, 29);
             this.tbQuelltext.Multiline = true;
@@ -51,7 +51,6 @@
             this.tbQuelltext.TabIndex = 0;
             this.tbQuelltext.TabStop = false;
             this.tbQuelltext.Text = resources.GetString("tbQuelltext.Text");
-            this.tbQuelltext.TextChanged += new System.EventHandler(this.tbQuelltext_TextChanged);
             // 
             // tbFehler
             // 
@@ -66,8 +65,8 @@
             // 
             // tbAusgabe
             // 
-            this.tbAusgabe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbAusgabe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tbAusgabe.Location = new System.Drawing.Point(13, 29);
             this.tbAusgabe.Multiline = true;
             this.tbAusgabe.Name = "tbAusgabe";
@@ -105,7 +104,6 @@
             this.Controls.Add(this.tbQuelltext);
             this.Name = "HauptfensterProxy";
             this.Text = "LiveCode Konsole";
-            
             this.Shown += new System.EventHandler(this.HauptfensterProxy_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

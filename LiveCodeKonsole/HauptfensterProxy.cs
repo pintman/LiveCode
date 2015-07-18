@@ -13,13 +13,13 @@ using System.Reflection;
 
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
 
 namespace LiveCodeKonsole
 {
     public partial class HauptfensterProxy : Form, ICompilerCheckedRunner, IProzessreaktion
     {        
         string dateiNameKlasse = Path.GetTempPath() + "MeineKlasse.cs";
-        bool bAktualisierungLaeuft;
         Compiler compiler;
 
         public HauptfensterProxy()
@@ -27,12 +27,28 @@ namespace LiveCodeKonsole
             InitializeComponent();
             Trace.TraceInformation("Started. Using File " + dateiNameKlasse);
 
-            bAktualisierungLaeuft = false;
-
             compiler = new Compiler();
 
             QuelltextLaden();
-            QuelltextKompilierenUndAusfuehren();            
+        }
+
+        private void thread_KompilierenUndAusführen()
+        {
+            string sQuelltextAlt = "";
+            string sQuelltextNeu = tbQuelltext.Text;
+
+            while(this.Visible)
+            {
+                if (!sQuelltextNeu.Equals(sQuelltextAlt))
+                {
+                    QuelltextKompilierenUndAusfuehren();
+                }
+                sQuelltextAlt = sQuelltextNeu;
+                sQuelltextNeu = tbQuelltext.Text;
+                Thread.Sleep(300); // TODO in settings exportieren
+            }
+
+            Trace.TraceInformation("compilation thread finished.");
         }
 
         private void QuelltextLaden()
@@ -51,11 +67,6 @@ namespace LiveCodeKonsole
             }
         }
 
-        private void tbQuelltext_TextChanged(object sender, EventArgs e)
-        {
-            QuelltextKompilierenUndAusfuehren();
-        }
-
         private void QuelltextSichern()
         {
             StreamWriter writer = new StreamWriter(dateiNameKlasse);
@@ -65,41 +76,62 @@ namespace LiveCodeKonsole
 
         private void QuelltextKompilierenUndAusfuehren()
         {
-            // TODO: wird noch nicht berücksichtigt: keine Nebenläufigkeit
-            if(bAktualisierungLaeuft)
-            {
-                return;
-            }
-                
-            bAktualisierungLaeuft = true;
-
             compiler.CompileSource(tbQuelltext.Text, Path.GetTempPath() + DateTime.Now.Ticks + "-MeineKlasse.exe");
             compiler.CheckCompilerResultsAndRun(this);
-
-            bAktualisierungLaeuft = false;
         }
 
         public void Ausfuehren()
         {
             BewachterProzess prozess = new BewachterProzess(compiler.GetPathToAssembly());
-            tbAusgabe.Text = prozess.Start(this);
+            setTextBoxTextThreadSafe(tbAusgabe, prozess.Start(this));
         }
 
         private void HauptfensterProxy_Shown(object sender, EventArgs e)
         {
             tbQuelltext.Focus();
+
+            // Startet den Compilerthread nachdem das Fenster angezeigt wird.
+            // Er läuft, solange das Fesnter sichtbar ist.
+            ThreadStart tsKompilieren = new ThreadStart(thread_KompilierenUndAusführen);
+            Thread thread = new Thread(tsKompilieren);
+            thread.Start();
+            Trace.TraceInformation("starting compilation thread.");
         }
 
         public void FehlerAnzeigen(string sFehler)
         {
-            tbFehler.Text = sFehler;
-            tbQuelltext.BackColor = Color.OrangeRed;
+            setTextBoxTextThreadSafe(tbFehler, sFehler);
+            setTextBoxBackColorThreadSafe(tbQuelltext, Color.OrangeRed); // TODO Farbe in Config
         }
 
         public void KeineCompilerfehlerAnzeigen()
         {
-            tbFehler.Text = "";
-            tbQuelltext.BackColor = Color.White;
+            setTextBoxTextThreadSafe(tbFehler, "");
+            setTextBoxBackColorThreadSafe(tbQuelltext, Color.White); // TODO Farbe in Config
+        }
+
+        /// <summary>
+        /// Setzt den Text einer Textbox. Die Methode kann aus einem anderen Thread 
+        /// aufgerufen werden und übergibt die Anweisung dem GUI-Thread.
+        /// </summary>        
+        private void setTextBoxTextThreadSafe(TextBox tb, string text)
+        {
+            this.Invoke((MethodInvoker)delegate()
+            {
+                tb.Text = text;
+            });
+        }
+
+        /// <summary>
+        /// Setzt die Hintegrundfarbe einer Textbox. Die Methode kann aus einem anderen Thread 
+        /// aufgerufen werden und übergibt die Anweisung dem GUI-Thread.
+        /// </summary>        
+        private void setTextBoxBackColorThreadSafe(TextBox tb, Color color)
+        {
+            this.Invoke((MethodInvoker)delegate()
+            {
+                tb.BackColor = color;
+            });
         }
 
         public void ProzessErfolgreich()
