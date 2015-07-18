@@ -19,8 +19,8 @@ ouput immediately.
 Download
 --------
 
-The current Version can be downloaded either
-[here (portable)](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-portable.zip?raw=true)
-or
-[here (setup)](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-setup.zip?raw=true). For
+The current Version can be downloaded either as portable version
+[LC-portable.zip](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-portable.zip?raw=true)
+or setup version
+[LC-setup.zip](https://github.com/pintman/LiveCode/blob/master/LiveCodeKonsole/publish/LC-setup.zip?raw=true). For
 the portable version, just extract the ZIP-Archive an run LiveCodeKonsole.exe.
