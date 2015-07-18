@@ -6,6 +6,7 @@ using System.Text;
 using System.CodeDom.Compiler;
 using Microsoft.CSharp;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace LiveCodeKonsole
 {
@@ -43,7 +44,7 @@ namespace LiveCodeKonsole
         {
             if (compilerResults.Errors.HasErrors)
             {
-                System.Diagnostics.Trace.TraceInformation("Error during compulation: " + CheckCompilerResults());
+                Trace.TraceInformation("Error during compilation: " + CheckCompilerResults());
                 runner.FehlerAnzeigen(CheckCompilerResults());
             }
             else
