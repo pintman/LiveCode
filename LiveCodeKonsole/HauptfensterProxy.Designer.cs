@@ -102,6 +102,7 @@
             this.Controls.Add(this.tbAusgabe);
             this.Controls.Add(this.tbFehler);
             this.Controls.Add(this.tbQuelltext);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HauptfensterProxy";
             this.Text = "LiveCode Konsole";
             this.Shown += new System.EventHandler(this.HauptfensterProxy_Shown);
