@@ -29,6 +29,12 @@ namespace LiveCodeKonsole
             InitializeComponent();
             Trace.TraceInformation("Started. Using File " + dateiNameKlasse);
 
+            // Configure dialog for saving and loading
+            ofdQuelltextLaden.Filter = "Quelltext (*.cs)|*.cs";
+            sfdQuelltextSpeichern.Filter = ofdQuelltextLaden.Filter;
+            ofdQuelltextLaden.FileName = "";
+            sfdQuelltextSpeichern.FileName = "";
+
             compiler = new Compiler();
 
             QuelltextLaden();
@@ -145,6 +151,27 @@ namespace LiveCodeKonsole
         public void ProzessFehlgeschlagen(string sUrsache)
         {
             FehlerAnzeigen(sUrsache);
+        }
+
+        private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ofdQuelltextLaden.ShowDialog();
+        }
+
+        private void ofdQuelltextLaden_FileOk(object sender, CancelEventArgs e)
+        {
+            string sFilename = ofdQuelltextLaden.FileName;
+            tbQuelltext.Text = File.ReadAllText(sFilename);
+        }
+        private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sfdQuelltextSpeichern.ShowDialog();
+        }
+
+        private void sfdQuelltextSpeichern_FileOk(object sender, CancelEventArgs e)
+        {
+            string sFilename = sfdQuelltextSpeichern.FileName;
+            File.WriteAllText(sFilename, tbQuelltext.Text);
         }
     }    
 }
